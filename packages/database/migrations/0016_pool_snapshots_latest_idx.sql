@@ -1,0 +1,12 @@
+-- Latest-snapshot lookup index: the band-lane pool selection correlates
+-- `max(s2.id)` per (chain_id, pool_address) against pool_snapshots
+-- (repositories.ts). With only (chain_id, pool_address, captured_at)
+-- available, that max() walks every snapshot row of every pool; at 28.5M
+-- rows / 188k pools the selection query ran for 10+ minutes on prod
+-- (observed 2026-07-20), serializing every enrichment/scoring pass behind
+-- it. This index makes the per-pool max(id) a single btree descent.
+--
+-- Prod note: built manually with CREATE INDEX CONCURRENTLY on 2026-07-20
+-- (a plain CREATE INDEX write-locks the table under a live worker); this
+-- migration is the repo-authoritative record and no-ops there.
+CREATE INDEX IF NOT EXISTS "pool_snapshots_latest_idx" ON "pool_snapshots" USING btree ("chain_id","pool_address","id");

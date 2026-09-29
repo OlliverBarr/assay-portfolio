@@ -1,0 +1,56 @@
+{
+  "name": "assay",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Launch forensics for Robinhood Chain: deterministic evidence pipeline with an advisory, evidence-cited LLM research layer. Never trades.",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "bun@1.3.14",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:postgres": "vitest run tests/integration/postgres.test.ts",
+    "lint": "eslint \"**/*.ts\"",
+    "worker": "bun apps/worker/src/main.ts",
+    "dashboard": "bun apps/dashboard/src/main.ts",
+    "demo": "bun apps/dashboard/src/demo.ts",
+    "validate:range": "bun apps/worker/src/validate-range.ts",
+    "validate:swaps": "bun apps/worker/src/validate-swaps.ts",
+    "validate:risk": "bun apps/worker/src/validate-risk.ts",
+    "validate:deployer": "bun apps/worker/src/validate-deployer.ts",
+    "validate:telegram": "bun apps/worker/src/validate-telegram.ts",
+    "validate:candidate": "bun apps/worker/src/validate-candidate.ts",
+    "validate:judgment": "bun apps/worker/src/validate-judgment.ts",
+    "enrich:once": "bun apps/worker/src/enrich-once.ts",
+    "deadman": "bun apps/worker/src/deadman.ts",
+    "decide": "bun apps/worker/src/decide.ts",
+    "feedback": "bun apps/worker/src/feedback.ts",
+    "calibrate": "bun apps/worker/src/calibrate.ts",
+    "calibrate-sweep": "bun apps/worker/src/calibrate-sweep.ts",
+    "floor:volume": "bun apps/worker/src/floor-volume.ts",
+    "calibrate:died": "bun apps/worker/src/calibrate-died.ts",
+    "judge:replay": "bun apps/worker/src/judge-replay.ts",
+    "judge:report": "bun apps/worker/src/judge-report.ts",
+    "retro:winners": "bun apps/worker/src/retro-winners.ts"
+  },
+  "overrides": {
+    "esbuild": "0.28.2",
+    "fast-uri": "3.1.7",
+    "vite": "8.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "^20.11.30",
+    "@typescript-eslint/eslint-plugin": "8.71.0",
+    "@typescript-eslint/parser": "8.71.0",
+    "eslint": "10.11.0",
+    "globals": "17.12.0",
+    "typescript": "^5.9.3",
+    "vite": "8.3.1",
+    "vitest": "4.1.11"
+  }
+}

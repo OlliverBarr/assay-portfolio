@@ -1,0 +1,13 @@
+{
+  "name": "@assay/alerts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@assay/database": "workspace:*",
+    "@assay/scoring": "workspace:*"
+  }
+}

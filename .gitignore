@@ -1,0 +1,18 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+backups/
+*.sql.gz
+.DS_Store
+
+# Operator-private runbooks and personal notes — not part of the public repo.
+docs/execution-methodology.md
+docs/ops-private.md
+/TODO.md
+
+# Local OMP advisor enablement — not part of the public repo (guidance in .omp/WATCHDOG.md is tracked).
+.omp/config.yml

@@ -1,0 +1,19 @@
+{
+  "name": "@assay/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@assay/activity": "workspace:*",
+    "@assay/alerts": "workspace:*",
+    "@assay/chain": "workspace:*",
+    "@assay/database": "workspace:*",
+    "@assay/discovery": "workspace:*",
+    "@assay/enrichment": "workspace:*",
+    "@assay/holders": "workspace:*",
+    "@assay/judgment": "workspace:*",
+    "@assay/risk-engine": "workspace:*",
+    "@assay/scoring": "workspace:*",
+    "viem": "^2.21.0"
+  }
+}

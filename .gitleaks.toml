@@ -1,0 +1,15 @@
+title = "Assay secret-scan allowlist"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Public addresses and the EIP-1967 storage read are not credentials"
+regexTarget = "match"
+paths = [
+  '''^\.env$'''
+]
+regexes = [
+  '''(?i)token_address"\s*:\s*"0x[0-9a-f]{40}"''',
+  '''tokenAddress,\s*eip1967ImplementationSlot'''
+]

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Assay: Analytics</title>
+  <link rel="stylesheet" href="/app.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Assay: Analytics</h1>
+    <p class="subtitle">
+      Read-only console over the pipeline's own data. Local-only by default,
+      no authentication: see .env.example before exposing it anywhere.
+    </p>
+  </header>
+
+  <main class="grid">
+    <section class="panel" id="panel-funnel" aria-labelledby="title-funnel">
+      <h2 id="title-funnel">Funnel</h2>
+      <p class="caption">
+        Pools discovered → trusted-quote pools → band entrants → ever-eligible
+        tokens → ever-alerted tokens per level. Stages come from different
+        tables and grains, so this is a narrative funnel, not a strict subset
+        chain.
+      </p>
+      <div class="chart-box"><canvas id="chart-funnel"></canvas></div>
+      <p class="panel-status" id="status-funnel" hidden></p>
+    </section>
+
+    <section class="panel" id="panel-cadence" aria-labelledby="title-cadence">
+      <h2 id="title-cadence">Launch cadence (30d)</h2>
+      <p class="caption">
+        Pools discovered per day over the trailing 30 days, with the
+        trusted-quote subset. Bucketed by discovery time, not on-chain
+        creation time; a backfill shows up as a spike.
+      </p>
+      <div class="chart-box"><canvas id="chart-cadence"></canvas></div>
+      <p class="panel-status" id="status-cadence" hidden></p>
+    </section>
+
+    <section class="panel" id="panel-precision" aria-labelledby="title-precision">
+      <h2 id="title-precision">Score → realized outcome</h2>
+      <p class="caption">
+        Share of the full band-entrant population reaching ≥2x/≥5x/≥10x by
+        72h, at or above each score floor. Score is "as known": the latest
+        score at most 15 minutes after band entry. Population-wide, not
+        alert-conditioned; n is annotated per floor.
+      </p>
+      <div class="chart-box"><canvas id="chart-precision"></canvas></div>
+      <p class="panel-status" id="status-precision" hidden></p>
+    </section>
+
+    <section class="panel" id="panel-quartiles" aria-labelledby="title-quartiles">
+      <h2 id="title-quartiles">Entry-feature quartiles</h2>
+      <p class="caption">
+        Median realized 72h multiple by quartile of one entry-time feature,
+        over the full band-entrant population. Rows with a missing or
+        non-numeric value are excluded from every bucket, not silently
+        dropped from the count.
+      </p>
+      <div class="control-row">
+        <label for="quartile-feature">Feature</label>
+        <select id="quartile-feature"></select>
+      </div>
+      <div class="chart-box"><canvas id="chart-quartiles"></canvas></div>
+      <p class="panel-status" id="status-quartiles" hidden></p>
+    </section>
+
+    <section class="panel" id="panel-survival" aria-labelledby="title-survival">
+      <h2 id="title-survival">Survival by horizon</h2>
+      <p class="caption">
+        SURVIVED/DIED label counts per horizon. Labels only exist once
+        observed history reaches the horizon, so recent pools are absent;
+        this lags reality by up to the longest horizon.
+      </p>
+      <div class="chart-box"><canvas id="chart-survival"></canvas></div>
+      <p class="panel-status" id="status-survival" hidden></p>
+    </section>
+
+    <section class="panel panel-wide" id="panel-alerts" aria-labelledby="title-alerts">
+      <h2 id="title-alerts">Recent alerts</h2>
+      <p class="caption">
+        Most recent alerts, newest first, with their realized 72h outcome
+        where the labeling window has elapsed. Token name/symbol are
+        untrusted on-chain metadata, rendered as plain text only.
+      </p>
+      <div class="table-box">
+        <table id="table-alerts">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Level</th>
+              <th>Score</th>
+              <th>Token</th>
+              <th>Delivered</th>
+              <th>72h multiple</th>
+            </tr>
+          </thead>
+          <tbody id="table-alerts-body"></tbody>
+        </table>
+      </div>
+      <p class="panel-status" id="status-alerts" hidden></p>
+    </section>
+
+    <section class="panel panel-wide" id="panel-judgment" aria-labelledby="title-judgment">
+      <h2 id="title-judgment">Judgment quality</h2>
+      <p class="caption">
+        LLM judgment-brief status mix, LIVE mode only (REPLAY reruns are
+        excluded to avoid double-counting). Per prompt version and per week,
+        so drift after a prompt change is visible.
+      </p>
+      <div class="judgment-row">
+        <div class="chart-box"><canvas id="chart-judgment-versions"></canvas></div>
+        <div class="chart-box"><canvas id="chart-judgment-weekly"></canvas></div>
+      </div>
+      <p class="panel-status" id="status-judgment" hidden></p>
+    </section>
+  </main>
+
+  <script src="/chart.umd.js"></script>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
