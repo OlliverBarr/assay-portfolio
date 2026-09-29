@@ -14,6 +14,6 @@
     "@assay/judgment": "workspace:*",
     "@assay/risk-engine": "workspace:*",
     "@assay/scoring": "workspace:*",
-    "viem": "^2.21.0"
+    "viem": "^2.56.9"
   }
 }
