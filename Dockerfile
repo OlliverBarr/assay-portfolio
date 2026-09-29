@@ -6,7 +6,7 @@
 # `bun.lock` is tracked in git: a fresh server clone always has it, so the
 # image installs with `--frozen-lockfile`, giving a build that is
 # reproducible from the committed lockfile alone.
-FROM oven/bun:1.3.14@sha256:e10577f0db68676a7024391c6e5cb4b879ebd17188ab750cf10024a6d700e5c4
+FROM oven/bun:1.4.2@sha256:9114c058aeae42162ee16dd5084b95fe9473970bb6bcb5b232ab1630f0546895
 WORKDIR /app
 
 # Manifests first, so the install layer only invalidates when a package.json
