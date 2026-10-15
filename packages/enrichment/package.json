@@ -9,6 +9,6 @@
   "dependencies": {
     "@assay/chain": "workspace:*",
     "@assay/database": "workspace:*",
-    "viem": "^2.21.0"
+    "viem": "^2.56.9"
   }
 }

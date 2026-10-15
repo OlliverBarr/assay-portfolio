@@ -9,7 +9,7 @@
   "dependencies": {
     "@assay/chain": "workspace:*",
     "@assay/database": "workspace:*",
-    "viem": "^2.21.0"
+    "viem": "^2.56.9"
   },
   "devDependencies": {
     "drizzle-orm": "0.45.3"
