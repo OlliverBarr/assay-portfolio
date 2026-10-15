@@ -12,7 +12,7 @@
     "postgres": "^3.4.4"
   },
   "devDependencies": {
-    "@electric-sql/pglite": "0.2.14",
+    "@electric-sql/pglite": "0.5.8",
     "drizzle-kit": "0.31.11"
   }
 }
